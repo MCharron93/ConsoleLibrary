@@ -31,6 +31,20 @@ namespace ConsoleLibrary.Controllers
       }
     }
 
+    [HttpGet("{index}")]
+    public ActionResult<Book> GetOneBook(int index)
+    {
+      try
+      {
+        return Ok(_ls.GetOneBook(index));
+      }
+      catch (System.Exception err)
+      {
+
+        return BadRequest(err.Message);
+      }
+    }
+
     [HttpPost]
     public ActionResult<Book> Create([FromBody] Book newBook)
     {
@@ -51,6 +65,19 @@ namespace ConsoleLibrary.Controllers
       try
       {
         return Ok(_ls.Delete(index));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
+    [HttpPut("{index}")]
+    public ActionResult<Book> EditBook(int index, [FromBody] Book editedBook)
+    {
+      try
+      {
+        return Ok(_ls.EditBook(index, editedBook));
       }
       catch (System.Exception err)
       {
